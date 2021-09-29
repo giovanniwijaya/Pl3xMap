@@ -5,8 +5,8 @@ import io.papermc.paperweight.util.registering
 plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
     id("io.papermc.paperweight.patcher") version "1.1.7"
-    id("net.minecrell.plugin-yml.bukkit") version "0.4.0"
-    id("xyz.jpenilla.run-paper") version "1.0.3"
+    id("net.minecrell.plugin-yml.bukkit") version "0.5.0"
+    id("xyz.jpenilla.run-paper") version "1.0.4"
 }
 
 val mojangMappedServer: Configuration by configurations.creating
@@ -19,8 +19,8 @@ dependencies {
     val cloudVersion = "1.5.0"
     implementation("cloud.commandframework", "cloud-paper", cloudVersion)
     implementation("cloud.commandframework", "cloud-minecraft-extras", cloudVersion)
-    implementation("net.kyori", "adventure-text-minimessage", "4.1.0-SNAPSHOT")
-    implementation("io.undertow", "undertow-core", "2.2.3.Final")
+    implementation("net.kyori", "adventure-text-minimessage", "4.2.0-SNAPSHOT")
+    implementation("io.undertow", "undertow-core", "2.2.10.Final")
     implementation("org.bstats", "bstats-bukkit", "2.2.1")
     mojangMappedServer("io.papermc.paper", "paper", "1.17.1-R0.1-SNAPSHOT", classifier = "mojang-mapped")
     remapper("org.quiltmc", "tiny-remapper", "0.4.1")
