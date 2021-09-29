@@ -15,6 +15,7 @@ import net.pl3x.map.plugin.listener.PlayerListener;
 import net.pl3x.map.plugin.listener.WorldEventListener;
 import net.pl3x.map.plugin.network.Network;
 import net.pl3x.map.plugin.task.UpdatePlayers;
+import net.pl3x.map.plugin.task.UpdateTime;
 import net.pl3x.map.plugin.task.UpdateWorldData;
 import net.pl3x.map.plugin.util.FileUtil;
 import net.pl3x.map.plugin.util.ReflectionUtil;
@@ -37,6 +38,7 @@ public final class Pl3xMapPlugin extends JavaPlugin {
     private PlayerManager playerManager;
     private UpdateWorldData updateWorldData;
     private UpdatePlayers updatePlayers;
+    private UpdateTime updateTime;
     private MapUpdateListeners mapUpdateListeners;
     private WorldEventListener worldEventListener;
 
@@ -105,6 +107,9 @@ public final class Pl3xMapPlugin extends JavaPlugin {
         this.updatePlayers = new UpdatePlayers(this);
         this.updatePlayers.runTaskTimer(this, 20, 20);
 
+        this.updateTime = new UpdateTime();
+        this.updateTime.runTaskTimer(this, 0, 20 * 5);
+
         this.updateWorldData = new UpdateWorldData();
         this.updateWorldData.runTaskTimer(this, 0, 20 * 5);
 
@@ -143,6 +148,12 @@ public final class Pl3xMapPlugin extends JavaPlugin {
                 this.updatePlayers.cancel();
             }
             this.updatePlayers = null;
+        }
+        if (this.updateTime != null) {
+            if (!this.updateTime.isCancelled()) {
+                this.updateTime.cancel();
+            }
+            this.updateTime = null;
         }
         if (this.updateWorldData != null) {
             if (!this.updateWorldData.isCancelled()) {
